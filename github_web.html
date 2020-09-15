@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+    <link rel="stylesheet" type="text/css" href="./Day06hm.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0;">
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo"></div>
+        </div>
+        <div class="content">
+            <div class="title">Github Trending</div>
+            <div class="articles"></div>
+        </div>
+    </div>
+
+    <script>
+        var api = "https://github-trending-api.now.sh/repositories"
+
+        function items(articles) {
+            for (article of articles) {
+                if (!article.language) {
+                    var language = "None"
+                } else {
+                    var language = article.language
+                }
+                var article_temple = `<div class="article" onclick="window.open('${article.url}')">
+                                        <div class="bar" style="background: ${article.languageColor}"></div>
+                                        <div class="article-info">
+                                            <div style="display: flex; flex-direction: column;">
+                                                <div class="article-title">${article.name}</div>
+                                                <div class="language" style="color: ${article.languageColor}">${language}</div>
+                                            </div>
+                                            <div style="display: flex; flex-direction: column;">
+                                                <div class="description">${article.description.slice(0, 10)}...</div>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div class="author">👤by @${article.author}</div>
+                                                <div class="stars">⭐️${article.stars}</div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                $(".articles").append(article_temple)
+            }
+        }
+
+        (function () {
+            console.log("Ready to Ajax")
+            $.ajax({
+                url: api,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (resp, ) {
+                    console.log("Ajax success.")
+                    items(resp)
+                },
+            })
+        })()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js"></script>
+    <link rel="stylesheet" href="Day04.css">
+</head>
+
+<body style="margin: 0;">
+    <div class="pad">
+        <div id="drag" class="left" contenteditable="true" placeholder=""></div>
+        <div class="right"></div>
+    </div>
+
+
+    <script>
+        marked.setOptions({breaks:true})
+        $('#drag').sortable()
+        $('.left').keyup(function(){
+            var leftText = document.querySelector('.left').innerText
+            console.log(leftText)
+            $('.right').html(marked(leftText))
+        })
+        
+    </script>
+
+</body>
+
+</html>

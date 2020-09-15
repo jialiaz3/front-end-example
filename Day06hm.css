@@ -1,0 +1,103 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #F7F7F7;
+    padding: 1.5vw;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 12.5vw;
+    height: 10vw;
+    background-image: url("//res.cform.cn/unzip/1581644166730_5062576910276122/github_octocat.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.content {
+    width: 85%;
+    padding: 2vw 4vw;
+    background-color: white;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 40vw;
+    height: 6vw;
+    margin: 1vw 0 3vw 0;
+    flex-shrink: 0;
+    font-size: 5vw;
+}
+
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+.article {
+    margin: 1.5vw 0;
+    border-radius: 0.5vw;
+    display: flex;
+}
+
+.article:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    box-shadow: 
+        0 0 0.4vw 0 #9fcfe4,
+        0 0 0.7vw 0.3vw #acd5d6;
+}
+
+.bar {
+    width: 1.2vw;
+    height: 15vw;
+    border-radius: 0.6vw;
+    background: orange;
+}
+
+.article-info {
+    width: 19vw;
+    height: 15vw;
+    margin-left: 0.15vw;
+    padding: 0 1.8vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.5vw 0 #c6c9cc;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.article-title {
+    font-size: 1.4vw;
+    font-weight: 500;
+    color: #3b3b3b
+}
+
+.language {
+    font-size: 1vw;
+    font-weight: 300; 
+}
+
+.description {
+    font-size: 1vw;
+    color: #727272
+}
+
+.author, .stars {
+    font-size: 1.1vw;
+    color: #3b3b3b
+}
+

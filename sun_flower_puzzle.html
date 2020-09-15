@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #29384C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .frame {
+            width: 225px;
+            height: 288px;
+            padding: 51px;
+            background-image: url("//res.cform.cn/unzip/1581565864304_9053483119569032/frame.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+        .fragment {
+            display: flex;
+        }
+        .piece {
+            width: 75px;
+            height: 72px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .result {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frame"></div>
+        <div class="result"></div>
+        <div class="fragment"></div>
+    </div>
+    
+    <script>
+
+      var randomId = _.shuffle(_.range(1,13))
+      var $frame = $('.frame')
+      var $result = $('.result')
+      var $fragment = $('.fragment')
+      
+      for (var p of randomId){
+        var $piece = $(`<div class = "piece" id = "${p}"></div>`)
+        $piece.css("background-image",`url('https://res.cform.cn/unzip/1581566323088_1137315517898494/${p}.png')`)
+        $fragment.append($piece)
+      }
+      
+      $(".piece").click(function(){
+        var current_piece = $(this)
+        if (current_piece.hasClass("in-the-frame")){
+          current_piece.toggleClass("in-the-frame")
+          $fragment.append(current_piece)
+        }
+        else {
+          current_piece.toggleClass("in-the-frame")
+          $frame.append(current_piece)
+        }
+        
+        if($(".in-the-frame").length == 12) {
+          var current_order = []
+          $(".frame").children().each(function(){
+            current_order.push($(this).attr("id"))
+          })
+          if (current_order.join() == "1,2,3,4,5,6,7,8,9,10,11,12") {
+            $result.text("Congradulations!")
+          }
+          else {
+            $result.text("笨羊🐑咩咩.")
+          }
+        }
+        else {
+          $result.text("")
+        }
+
+
+   
+      })
+
+      
+      
+      
+
+      
+      
+        
+    </script>
+</body>
+</html>

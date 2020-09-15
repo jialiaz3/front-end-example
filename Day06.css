@@ -1,0 +1,26 @@
+body {
+    background-color: #0F0E17;
+}
+
+.centerframe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background-image: url('//res.cform.cn/unzip/1581318351549_5489170958335894/confuse.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 86px;
+    margin-bottom: 50px;
+}
+
+.base {
+    display: flex;
+    flex-direction: column;
+
+}
+

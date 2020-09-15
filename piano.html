@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+        .bg {
+            height: 100vh;
+            background: #22475e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .keyboard {
+            width: 500px;
+            display: flex;
+        }
+        .black {
+            height: 122px;
+            margin-left: -465px;
+            display: flex;
+            justify-content: center;
+        }
+        .white {
+            display: flex;
+            justify-content: center;
+        }
+
+        .key {
+            transition: all .15s ease-out;
+        }
+        .black .key {
+            width: 40px;
+            height: 120px;
+            margin: 0 10px;
+            border: 1px solid #363636;
+            border-radius: 0 0 6px 6px;
+            z-index: 1;
+            background: #161616;
+            box-shadow: 0 3px 2px 0 #282828;
+        }
+        .white .key {
+            width: 60px;
+            height: 190px;
+            border: 1px solid #B2B2A7;
+            border-radius: 6px;
+            background: #fffff0;
+            box-shadow: 0 10px 2px 0 #d4d4c9;
+        }
+
+        .white .active {
+            box-shadow: none;
+            background: #d4d4c9;
+            transform: scaleY(1.03) translate(0, 6px);
+        }
+        .black .active {
+            box-shadow: none;
+            background: #3f3f3f;
+            transform: scaleY(1.03) translate(0, 2px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="keyboard">
+            <div class="white">
+                <div class="key" id="c1"></div>
+                <div class="key" id="d1"></div>
+                <div class="key" id="e1"></div>
+                <div class="key" id="f1"></div>
+                <div class="key" id="g1"></div>
+                <div class="key" id="a1"></div>
+                <div class="key" id="b1"></div>
+                <div class="key" id="c2"></div>
+            </div>
+            <div class="black">
+                <div class="key" id="c-1"></div>
+                <div class="key" id="d-1"></div>
+                <div class="key" style="visibility: hidden;"></div>
+                <div class="key" id="f-1"></div>
+                <div class="key" id="g-1"></div>
+                <div class="key" id="a-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var sounds = {
+            "c1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/1do.mp4",   // C1
+            "d1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/2re.mp4",   // D1
+            "e1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/3mi.mp4",   // E1
+            "f1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/4fa.mp4",   // F1
+            "g1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/5sol.mp4",  // G1
+            "a1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/6la.mp4",   // A1 
+            "b1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/7si.mp4",   // B1
+            "c2": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/8do.mp4",   // C2
+
+            "c-1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/black1_C%23.mp4",   // C#1
+            "d-1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/black2_D%23.mp4",   // D#1
+            "f-1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/black3_F%23.mp4",   // F#1
+            "g-1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/black4_G%23.mp4",   // G#1
+            "a-1": "https://mugglecoding-website.oss-cn-beijing.aliyuncs.com/fe/black5_A%23.mp4",   // A#1
+        }
+
+        var keybind = {
+            "a": "c1",
+            "s": "d1",
+            "d": "e1",
+            "f": "f1",
+            "g": "g1",
+            "h": "a1",
+            "j": "b1",
+            "k": "c2",
+            "w": "c-1",
+            "e": "d-1",
+            "t": "f-1",
+            "y": "g-1",
+            "u": "a-1",
+
+            "1": "c1",
+            "2": "d1",
+            "3": "e1",
+            "4": "f1",
+            "5": "g1",
+            "6": "a1",
+            "7": "b1",
+            "8": "c2",
+        }
+
+        function play(keyname) {
+            var $key = $(`#${keyname}`)
+            var sound = new Howl({
+                src: [sounds[keyname]]
+            })
+
+            sound.play()   /* 播放音效 */
+            $key.addClass("active")   /* 改变样式 */
+            setTimeout(function () {
+                $key.removeClass("active")   /* 恢复样式 */
+            }, 150)
+        }
+
+        $(".key").mousedown(function () {
+            var key = $(this).attr("id")
+            play(key)
+        })
+
+        $(document).keydown(function (event) {
+            var key = keybind[event.key]
+            play(key)
+        })
+    </script>
+</body>
+
+</html>

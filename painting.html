@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./f.js"></script>
+    <style>
+        .centerframe {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .art {
+            -webkit-box-shadow: 10px 10px 21px -8px rgba(0, 0, 0, 0.62);
+            -moz-box-shadow: 10px 10px 21px -8px rgba(0, 0, 0, 0.62);
+            box-shadow: 10px 10px 21px -8px rgba(0, 0, 0, 0.62);
+        }
+        .red {
+            background-color: crimson;
+        }
+            .blue {
+                background-color: blue;
+            }
+
+        .yellow {
+            background-color: yellow;
+        }
+        .white {
+            background-color: white;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            border-width: 3px;
+            border-style: solid;
+        }
+        .upper {
+            display: flex;
+        }
+        .lower {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="centerframe">
+        <div class="art">
+            <div class="upper">
+                <div>
+                    <div style="height:65px" class="white box"></div>
+                    <div style="height:70px" class="white box"></div>
+                </div>
+                <div style="width:150px;height: 141px;" class="red box"></div>
+            </div>
+            <div class="lower">
+                <div class="blue box"></div>
+                <div style="width:120px" class="white box"></div>
+                <div>
+                    <div style="height:20px;width:24px;" class="white box"></div>
+                    <div style="height:24px;width:24px" class="yellow box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

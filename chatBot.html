@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+
+        .centerframe {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat {
+            width: 500px;
+            height: 800px;
+            -webkit-box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.24);
+            -moz-box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.24);
+            box-shadow: 0px 0px 34px 0px rgba(0, 0, 0, 0.24);
+
+        }
+
+        .info {
+            height: 12%;
+            background-color: blue;
+            background-image: url('//res.cform.cn/unzip/1584085686109_3878944495157808/doodle2x.png');
+            box-sizing: border-box;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+
+        }
+
+        .content {
+            height: 80%;
+            background-color: #F6FBFF;
+            box-sizing: border-box;
+            padding: 5px 10px 5px 10px;
+            overflow: scroll;
+        }
+
+        .input-group {
+            height: 8%;
+            /* width: 50%; */
+            background-color: white;
+            padding: 20px 15px 20px 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: solid 1px lightblue;
+            /* line-height: 1; */
+        }
+
+        .input {
+            width: 80%;
+            overflow: auto;
+            outline: none;
+        }
+
+        .send {
+            height: 30px;
+            width: 30px;
+            background-image: url('//res.cform.cn/unzip/1584085686109_3878944495157808/send.png');
+            background-size: 100% 100%;
+
+        }
+
+        .bubble {
+            background-color: blue;
+            border-radius: 25px;
+            color: aliceblue;
+            padding: 10px 20px 10px 20px;
+            max-width: 50%;
+            min-width: 15%;
+            font-weight: bold;
+        }
+
+        .you {
+            display: flex;
+            margin-bottom: 30px;
+            margin-top: 30px;
+
+        }
+
+        .head {
+            background-image: url('//res.cform.cn/unzip/1584085686109_3878944495157808/you.png');
+            background-size: 100% 100%;
+            height: 45px;
+            width: 45px;
+
+        }
+
+        .other {
+            display: flex;
+            flex-direction: row-reverse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .gray {
+            background-color: gainsboro;
+        }
+
+        .bot {
+            background-image: url('//res.cform.cn/unzip/1584085686109_3878944495157808/other.png');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centerframe">
+        <div class="chat">
+            <div class="info">
+                <div style="transform: scale(1.2);" class="head bot"></div>
+                <div style="padding-left: 20px;">
+                    <div>我是菲菲，专门跟你闲聊的机器人</div>
+                    <div style="font-weight:lighter">经常在线</div>
+                </div>
+
+            </div>
+            <div class="content">
+
+            </div>
+            <div class="input-group">
+                <div contenteditable="" class="input">
+                    说点什么吧...
+                </div>
+                <div class="send"></div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function youSaid(t) {
+            return `
+                <div class="you">
+                    <div style="margin-right: 20px;" class="head"></div>
+                    <div class="bubble">${t}</div>
+                </div>`
+        }
+        function botSaid(t) {
+            return `
+                <div class="other">
+                    <div style="margin-left: 20px;" class="head bot"></div>
+                    <div style="color:black" class="gray bubble">${t}</div>
+                </div>`
+        }
+        
+        function send(msg){
+            var theUrl = 'https://1113639593764423.cn-shanghai.fc.aliyuncs.com/2016-08-15/proxy/chat-bot-service/chat-bot/?msg=' + msg
+            $.ajax({
+                url:theUrl,
+                success:function(resp){
+                    console.log(resp)
+                    $('.content').append(botSaid(resp.content))
+                }
+            })
+        }
+        
+        
+        $('.input').keydown(function (e) {
+            if (e.key == 'Enter') {
+                e.preventDefault()
+                var $text = $(this).text()
+                $('.content').append(youSaid($text))
+                send($text)
+                $(this).empty()
+            }
+        })
+    </script>
+</body>
+
+</html>

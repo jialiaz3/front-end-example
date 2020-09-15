@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.core.min.js"></script>
+    <style>
+        .bg {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover {
+            background-image: url('//res.cform.cn/unzip/1581653834998_46190621655931996/cover.jpg');
+            background-position: center;
+            background-size: cover;
+            height: 520px;
+            width: 520px;
+            margin-right: -250px;
+            z-index: 999;
+            border-radius: 2px;
+            -webkit-box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.31);
+            -moz-box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.31);
+            box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.31);
+
+        }
+
+        .record {
+            background-image: url('//res.cform.cn/unzip/1581653834998_46190621655931996/vinyl.png');
+            background-position: center;
+            background-size: cover;
+            width: 500px;
+            height: 500px;
+            -webkit-box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.43);
+            -moz-box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.43);
+            box-shadow: 0px 0px 53px 1px rgba(0, 0, 0, 0.43);
+            border-radius: 50%;
+
+        }
+        .record-animation {
+            animation-name: round;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-play-state: paused;
+
+        }
+        .record-play{
+            animation-play-state: running;
+        }
+        
+        @keyframes round{
+            0%{
+                transform: rotate(0deg);
+            }
+            
+            100%{
+                transform: rotate(720deg);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+
+        <div class="cover"></div>
+        <div class="record record-animation"></div>
+
+
+
+    </div>
+    <script>
+        var player = new Howl({
+            src:['https://oss.mugglecoding.com/fe/bgm.mp4']
+        })
+        $('.record').click(function(){
+           $(this).toggleClass('record-play') 
+           if (player.playing()){
+               player.pause()
+           } else {
+               player.play()
+           }
+
+        })
+
+    </script>
+
+
+</body>
+
+
+
+
+</html>r

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+    <link rel="stylesheet" type="text/css" href="./Day06hm.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0;">
+    <div class="container">
+     
+        <div class="sidebar">
+            <div class="logo"></div>
+        </div>
+        <div class="content">
+            <div class="title">Github Trending</div>
+            <div class="articles">
+</div>
+        </div>
+    </div>
+
+    <script>
+      function article(r){
+        if (!r.language) {
+          var language = "None"
+        }
+        else {
+          var language = r.language
+        }
+        
+        var article_temple = `<div class="article" onclick="window.open('${r.url}')">
+                                        <div class="bar" style="background: ${r.languageColor}"></div>
+                                        <div class="article-info">
+                                            <div style="display: flex; flex-direction: column;">
+                                                <div class="article-title">${r.name}</div>
+                                                <div class="language" style="color: ${r.languageColor}">${language}</div>
+                                            </div>
+                                            <div style="display: flex; flex-direction: column;">
+                                                <div class="description">${r.description.slice(0, 10)}...</div>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div class="author">👤by @${r.author}</div>
+                                                <div class="stars">⭐️${r.stars}</div>
+                                            </div>
+                                        </div>
+                                    </div>`
+        return article_temple
+        
+
+
+
+        // return `
+				// 			<a style="text-decoration:none;" href = "r.url"><div class="articles">
+        //   			<div class="article">
+        //           <div class="upper">
+        //           		<h1>${r.name}</h1>
+        //           		<h5>${r.language}</h5>
+        //           </div>
+        //       		<div class="middle">
+        //   						<h3>${r.discription}</h3>
+        //   				</div>
+        //           <div class="lower">
+        //               <h5>${r.username}</h5>
+        //           		<h5>${r.stars}</h5>
+        //           </div>
+        //       	</div>
+        //   	</div>`
+      }
+      
+      $.ajax({
+        url:'https://github-trending-api.now.sh/repositories',
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(resp,){
+          for (r of resp) {
+            $(".articles").append(article(r))
+          }
+        }
+      })
+  
+
+    </script>
+</body>
+
+</html>

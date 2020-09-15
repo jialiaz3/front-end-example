@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            background: #222A3B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-mock {
+            width: 200px;
+            height: 350px;
+            padding: 80px 30px;
+            background-image: url("https://res.cform.cn/unzip/1582007540266_8497434676253208/source/frame.png");
+            background-size: 100% 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shadow {
+            height: 500px;
+            width: 250px;
+            margin-left: -250px;
+            border-radius: 50px;
+            z-index: -999;
+            -webkit-box-shadow: 2px 10px 45px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 2px 10px 45px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: 2px 10px 45px 0px rgba(0, 0, 0, 0.75);
+        }
+
+        .header {
+            height: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            width: auto;
+            height: 20px;
+        }
+
+        .input-box {
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-box * {
+            margin-top: 15px;
+        }
+
+        .input-box input {
+            padding: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 3px;
+            background: #fafaf1;
+        }
+
+        .submit {
+            width: 60px;
+            height: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 2px 0 lightblue;
+        }
+
+        .status {
+            font-size: 12px;
+            color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone-mock">
+        <div class="header"></div>
+        <div class="input-box">
+            <div>手机号归属地查询：</div>
+            <input id="mobile-number" type="text" name="mobile" maxlength="11" size="20">
+            <button class="submit">查询</button>
+            <div class="status"></div>
+        </div>
+    </div>
+    <div class="shadow"></div>
+
+    <script>
+        var api = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm"
+        var loading = "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/loading.gif"
+        var carriers = {
+            "中国电信": {
+                "zhName": "电信",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinatelecom.png"
+            },
+            "中国移动": {
+                "zhName": "移动",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinamobile.png"
+            },
+            "中国联通": {
+                "zhName": "联通",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinaunicom.png"
+            },
+        }
+
+        var $header = $(".header")
+        var $status = $(".status")
+        
+        $(".submit").click(function () {
+            var mobile_num = $("#mobile-number").val()
+            if (mobile_num.length == 11) {
+                $.ajax({
+                    url: api,
+                    type: 'GET',
+                    dataType: 'JSONP',
+                    data: {
+                        "tel": mobile_num,
+                    },
+                    beforeSend: function () {
+                        $header.empty()
+                        $status.empty()
+                        $status.html(`<image src=${loading} alt="">`)
+                    },
+                    success: function (data) {
+                        $header.empty()
+                        $status.empty()
+                        var province = data["province"]
+                        var carrier = data["catName"]
+
+                        if (province && carrier) {
+                            $header.html(
+                                `${province}${carriers[carrier].zhName}  <image src=${carriers[carrier].logo} alt="">`
+                            )
+                            $status.html("★★ 查找成功! ★★")
+                        } else {
+                            $status.html("很抱歉，未找到 🤷‍♀️🤷‍♂️")
+                        }
+                    },
+                })
+            } else {
+                $header.empty()
+                $status.empty()
+            }
+        })
+    </script>
+</body>
+
+</html>

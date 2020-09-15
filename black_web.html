@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="Day06.css">
+
+
+    <style>
+        .item {
+            color: aliceblue;
+            display: flex;
+            justify-content: space-between;
+            background-color: #18141D;
+            padding: 40px 20px 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0px 0px 20px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        .item:hover {
+            transition: transform 0.2s ease;
+            transform: scale(1.05);
+            border-color: orange;
+            border-width: 2px;
+            border-style: solid;
+            box-shadow: 0px 0px 5px 0px rgba(255, 132, 0, 1);
+            box-shadow: 0px 0px 37px -4px rgba(255, 132, 0, 0.66);
+        }
+
+        .item>h5 {
+            color: orange;
+
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div class="centerframe">
+        <div class="base">
+            <div class="header"></div>
+            <div class="item">
+                <h3>Google pushed to take action against Android bloatware</h3>
+                <h5>▲123</h5>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        function item(data) {
+            return `<a style="text-decoration:none;" href="${data.url}" ><div class="item">
+                        <h3>${data.title}</h3>
+                        <h5>▲ ${data.points}</h5>
+                    </div></a>`
+        }
+        $.ajax({
+            url: 'https://api.hnpwa.com/v0/news/1.json',
+            success: function (resp) {
+                for (var e of resp) {
+                    console.log(e)
+                    $('.base').append(item(e))
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

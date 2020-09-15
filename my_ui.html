@@ -1,0 +1,371 @@
+<html>
+    <head> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <style>
+        .body {
+            background-color: black;
+        }
+
+        .centerframe {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: black;
+        }
+
+        .header {
+            color: orange;
+            background-position: center;
+            align-items:center;
+            width: 80%;
+            height: 50px;
+            margin-top: 30;
+            margin-bottom: 10px;
+        }
+
+
+
+        .board{
+            box-sizing: border-box;
+            height: 300px;
+            width: 300px;
+            background-color: #18141D;
+            padding: 30px 30px 30px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px -6px rgba(0,0,0,0.2);
+            margin: 5px;
+        }
+
+        .board:hover {
+            transition: transform 0.2s ease;
+            transform: scale(1.05);
+            border-color: orange;
+            border-width: 2px;
+            border-style: solid;
+            box-shadow: 0px 0px 5px 0px rgba(255, 132, 0, 1);
+            box-shadow: 0px 0px 37px -4px rgba(255, 132, 0, 0.66);
+        }
+
+        .center_board{
+            box-sizing: border-box;
+            height: 300px;
+            width: 300px;
+            background-color: #18141D;
+            padding: 30px 30px 30px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px -6px rgba(0,0,0,0.2);
+            margin-top: 500px;
+            margin: 200px;
+        }
+
+        .center_board:hover {
+            transition: transform 0.6s ease;
+            transform: scale(2);
+            border-color: orange;
+            border-width: 2px;
+            border-style: solid;
+            box-shadow: 0px 0px 5px 0px rgba(255, 132, 0, 1);
+            box-shadow: 0px 0px 37px -4px rgba(255, 132, 0, 0.66);
+        }
+
+        .board_cell {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .board_box {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .key {
+            width: 70px;
+            height: 70px;
+            margin: 4px;
+            border-radius: 10px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(218, 218, 218, 1) 100%);
+            transition: .1s;
+        }
+
+        .red_key {
+            width: 70px;
+            height: 70px;
+            margin: 4px;
+            border-radius: 10px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(218, 218, 218, 1) 100%);
+            transition: .1s;
+        }
+
+        .green_key {
+            width: 70px;
+            height: 70px;
+            margin: 4px;
+            border-radius: 10px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(218, 218, 218, 1) 100%);
+            transition: .1s;
+        }
+
+        .blue_key {
+            width: 70px;
+            height: 70px;
+            margin: 4px;
+            border-radius: 10px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(218, 218, 218, 1) 100%);
+            transition: .1s;
+        }
+
+        .IR_key {
+            width: 70px;
+            height: 70px;
+            margin: 4px;
+            border-radius: 100px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 5%, rgba(218, 218, 218, 1) 100%);
+            transition: .1s;
+        }
+
+        .photo_key {
+            color: aliceblue;
+            height:50px;
+            width:200px;
+            background-color: black;
+            border-width:1px;
+            border-style:solid;
+            border-radius: 30px;  
+        }
+
+        .synthesis {
+            color: aliceblue;
+            height:50px;
+            width:100px;
+            background-color: black;
+            border-width:1px;
+            border-style:solid;
+            border-radius: 30px; 
+        }
+
+        .key_cell {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 20px;
+        }
+
+        .red {
+            background-color:  rgb(245, 50, 8);
+            background: radial-gradient(circle, rgb(230, 60, 60) 33%, rgb(219, 91, 68) 100%);
+            transform: scale(0.95);
+        }
+
+        .green {
+            background: rgb(129, 245, 149);
+            background: radial-gradient(circle, rgba(129, 245, 149, 1) 33%, rgba(181, 215, 153, 1) 100%);
+            transform: scale(0.95);
+        }
+
+        .blue {
+            background: rgb(99, 187, 255);
+            background: radial-gradient(circle, rgba(99, 187, 255, 1) 55%, rgba(165, 255, 250, 1) 100%);
+            transform: scale(0.95);
+            }
+        
+        .IR {
+            background: rgb(241, 124, 183);
+            background: radial-gradient(circle, rgba(241, 124, 183, 1) 55%, rgb(252, 92, 217) 100%);
+            transform: scale(0.95);
+        }
+
+        .orange {
+            background:orange;
+            transform: scale(0.95);
+        }
+
+        .white {
+            background:white;
+            transform:scale(0.95);
+        }
+
+        
+
+    </style>
+
+    <body>
+        <div class = "centerframe">
+            <h1 class = "header">Integrated Platform for Hyperspectral 3D Photogrammetry for Biomedical Applications</h1>
+            <div class = "board_box">
+                <div>
+                    <div class = "board_cell">
+                        <div class = "board">
+                            <div class = "key_cell">
+                                <div class = "red_key"></div>
+                                <div class = "green_key"></div>
+                                <div class = "blue_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <div class = "IR_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <button class = "photo_key">Take a Photo</button>
+                            </div>
+                        </div>
+                        <div class = "board">
+                            <div class = "key_cell">
+                                <div class = "red_key"></div>
+                                <div class = "green_key"></div>
+                                <div class = "blue_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <div class = "IR_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <button class = "photo_key">Take a Photo</button>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class = "board_cell">
+                        <div class = "board">
+                            <div class = "key_cell">
+                                <div class = "red_key"></div>
+                                <div class = "green_key"></div>
+                                <div class = "blue_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <div class = "IR_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <button class = "photo_key">Take a Photo</button>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class = "board_cell">
+                        <div class = "board">
+                            <div class = "key_cell">
+                                <div class = "red_key"></div>
+                                <div class = "green_key"></div>
+                                <div class = "blue_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <div class = "IR_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <button class = "photo_key">Take a Photo</button>
+                            </div>
+                        </div>
+                        <div class = "board">
+                            <div class = "key_cell">
+                                <div class = "red_key"></div>
+                                <div class = "green_key"></div>
+                                <div class = "blue_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <div class = "IR_key"></div>
+                            </div>
+                            <div class = "key_cell">
+                                <button class = "photo_key">Take a Photo</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class = "center_board">
+                    <div class = "key_cell">
+                        <div class = "key" id = "red"></div>
+                        <div class = "key" id = "green"></div>
+                        <div class = "key" id = "blue"></div>
+                    </div>
+                    <div class = "key_cell">
+                        <div class = "IR_key" id = "center_IR"></div>
+                    </div>
+                    <div class = "key_cell">
+                        <button style = "width: 100px;"class = "photo_key" id = "center_photo">Take a Photo</button>
+                        <button class = "synthesis">Synthesis</button>
+                    </div>
+                </div>
+
+            </div>
+            
+
+            
+
+            
+
+            
+
+        </div>
+     <script>
+
+         $(".IR_key").click(function(){
+             $(this).toggleClass('IR')
+         })
+         $(".red_key").click(function(){
+             $(this).toggleClass('red')
+         })
+         $(".green_key").click(function(){
+             $(this).toggleClass('green')
+         })
+         $(".blue_key").click(function(){
+             $(this).toggleClass('blue')
+         })
+         $(".photo_key").click(function(){
+             var $key = $(this)
+             $key.addClass('orange')
+            window.setTimeout(function () {
+                   $key.removeClass('orange')
+                   }, 80)
+         })
+
+
+         $("#center_IR").click(function(){
+             $(this).toggleClass("IR")
+             $(".IR_key").toggleClass('IR')
+         })
+         $("#red").click(function(){
+             $(this).toggleClass('red')
+             $(".red_key").toggleClass('red')
+         })
+         $("#green").click(function(){
+             $(this).toggleClass('green')
+             $(".green_key").toggleClass('green')
+         })
+         $("#blue").click(function(){
+             $(this).toggleClass('blue')
+             $(".blue_key").toggleClass('blue')
+         })
+
+         $("#center_photo").click(function(){
+             var $key = $(this)
+             $key.addClass('orange')
+            window.setTimeout(function () {
+                   $key.removeClass('orange')
+                   }, 80)
+         })
+
+         $(".synthesis").click(function(){
+             var $key = $(this)
+             $key.addClass('white')
+            window.setTimeout(function () {
+                   $key.removeClass('white')
+                   }, 80)
+         })
+
+
+
+
+
+
+     </script>   
+    </body>
+
+
+
+
+
+
+</html>

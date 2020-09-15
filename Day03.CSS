@@ -1,0 +1,74 @@
+body {
+    background-color: cornflowerblue;
+}
+
+.card {
+    height: 175px;
+    width: 125px;
+    background-image: url('//res.cform.cn/unzip/1581303397062_7219807376794356/cards/back.png');
+    background-size: 100% 100%;
+    margin: 3px;
+}
+
+.pool {
+    display: flex;
+    border-style: dashed;
+    border-color: aliceblue;
+    border-width: 2px;
+    width: 655px;
+    height: 181px;
+}
+
+.f1 {
+    background-image: url('//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f1.png');
+
+}
+
+.f2 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f2.png");
+}
+
+.f3 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f3.png");
+}
+
+.f4 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f4.png");
+}
+
+.f5 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f5.png");
+}
+
+.f6 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f6.png");
+}
+
+.f7 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f7.png");
+}
+
+.f8 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f8.png");
+}
+
+.f9 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f9.png");
+}
+
+.f10 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f10.png");
+}
+
+.f11 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f11.png");
+}
+
+.f12 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f12.png");
+}
+
+.f13 {
+    background-image: url("//res.cform.cn/unzip/1581303397062_7219807376794356/cards/f13.png");
+
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .centerframe {
+            width: 100vw;
+            height: 100vh;
+            background: lightslategrey;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .gallery {
+            width: 100%;
+            height: 85%;
+            display: flex;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .page-frame {
+            width: 100vw;
+            height: 100%;
+            transition: all 0.5s ease-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: none
+        }
+
+        .page {
+            width: 52vh;
+            height: 80vh;
+            border-radius: 3px;
+            background-size: cover;
+            box-shadow: 0 0 3px 0 black;
+        }
+
+        .sidebar {
+            width: 80vw;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            margin: 5px;
+            border: 1px solid gray;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .active {
+            background: #ff8246;
+        }
+
+        .nav {
+            width: 40vw;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav div {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            transition: all 0.15s linear;
+        }
+
+        .prev {
+            background-image: url("//res.cform.cn/unzip/1582191196445_16001607048138444/source/arrow_prev.png");
+        }
+
+        .prev:hover {
+            transform: scale(1.05);
+        }
+
+        .next {
+            background-image: url("//res.cform.cn/unzip/1582191196445_16001607048138444/source/arrow_next.png");
+        }
+
+        .next:hover {
+            transform: scale(1.05);
+        }
+
+        .disclaimer {
+            align-self: flex-start;
+            color: lightgray;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centerframe">
+        <div class="gallery"></div>
+        <div class="sidebar"></div>
+        <div class="nav">
+            <div class="prev"></div>
+            <div class="next"></div>
+        </div>
+        <div class="disclaimer">@本课程涉及资源来自互联网，仅供个人欣赏、学习之用，版权归发行公司所有。</div>
+    </div>
+
+    <script>
+        var pages = [
+            {name: "page1", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/1.png')"},
+            {name: "page2", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/2.png')"},
+            {name: "page3", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/3.png')"},
+            {name: "page4", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/4.png')"},
+            {name: "page5", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/5.png')"},
+            {name: "page6", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/6.png')"},
+            {name: "page7", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/7.png')"},
+            {name: "page8", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/8.png')"},
+            {name: "page9", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/9.png')"},
+            {name: "page10", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/10.png')"},
+            {name: "page11", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/11.png')"},
+            {name: "page12", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/12.png')"},
+            {name: "page13", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/13.png')"},
+            {name: "page14", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/14.png')"},
+            {name: "page15", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/15.png')"},
+            {name: "page16", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/16.png')"},
+            {name: "page17", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/17.png')"},
+            {name: "page18", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/18.png')"},
+            {name: "page19", src: "url('//res.cform.cn/unzip/1582191196445_16001607048138444/comic/19.png')"},
+        ]
+        var pageCount = pages.length
+        var pageIndex = 0
+        var offset = 0
+
+        for (var page of pages) {
+            $(".gallery").append(`<div class="page-frame"><div class="page" style="background-image: ${page.src}"></div></div>`)
+            $(".sidebar").append(`<div class="dot"></div>`)
+        }
+
+        var $firstPage = $(".page-frame").eq(0)
+        var $dot = $(".dot")
+        
+        $dot.eq(0).addClass("active")
+        $(".next").click(function () {
+            if (offset > (pageCount - 1) * (-100)) {
+                $firstPage.css("margin-left", `${offset - 100}vw`)
+                $dot.eq(pageIndex + 1).addClass("active")
+                $dot.eq(pageIndex).removeClass("active")
+                offset = offset - 100
+                pageIndex = pageIndex + 1
+            }
+        })
+        $(".prev").click(function () {
+            if (offset < 0) {
+                $firstPage.css("margin-left", `${offset + 100}vw`)
+                $dot.eq(pageIndex - 1).addClass("active")
+                $dot.eq(pageIndex).removeClass("active")
+                offset = offset + 100
+                pageIndex = pageIndex - 1
+            }
+        })
+    </script>
+</body>
+
+</html>

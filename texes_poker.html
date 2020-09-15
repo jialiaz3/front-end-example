@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="Day03.css"> 
+</head>
+
+
+<body>
+  <div class="pool">
+
+
+  </div>
+  <div style="margin-top:45px" class="dealer card"></div>
+
+  <script>
+    function sendCard(){
+      // var randomNum = Math.floor(Math.random() * (14 - 1)) + 1
+      $('.pool').append(`<div class="card f${ _.random(1,13) }"></div>`)
+    }
+    $('.dealer').click(function(){
+      $('.pool').append(`<div class="card f${ _.random(1,13) }"></div>`)
+      
+    })
+  
+  </script>
+
+</body>
+
+
+</html>

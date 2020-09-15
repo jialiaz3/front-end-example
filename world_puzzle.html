@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="Day05.js"></script>
+
+    <link rel="stylesheet" href="Day05.css">
+
+</head>
+
+<body style="margin:0;">
+    <div class="outer">
+
+        <div class="sink"></div>
+        <div class="result"></div>
+        <div class="submit btn">submit</div>
+        <div class="reload btn">reload</div>
+        <div class="given"></div>
+    </div>
+
+</body>
+<script>
+    var wordList = [
+        'action',
+        'happy',
+        'doom',
+        'sail'
+
+    ];
+    (function puzzle() {
+        var $given = $('.given')
+        var $sink = $('.sink')
+        var $submit = $('.submit')
+        var $result = $('.result')
+        var $reload = $('.reload')
+
+        var chosen = wordList.pop()
+
+        $submit.show()
+        $result.empty()
+        $reload.hide()
+        $sink.empty()
+
+        for (char of chosen) {
+            $given.append(`<div class="char">${char}</div>`)
+        }
+        $sink.css({
+            'width': chosen.length * 60
+        })
+        $('.char').one('click',function () {
+            $(this).appendTo($sink)
+        })
+        $submit.one('click',function () {
+            $innerText = $sink.text()
+            if ($innerText == chosen) {
+                $result.append('Let\'s Dance 🕺')
+                confetti.start()
+
+
+            } else {
+                $result.append('Wrong❌')
+            }
+            $reload.show()
+            $submit.hide()
+        })
+        $reload.one('click',puzzle)
+        confetti.stop()
+    })();
+</script>
+
+</html>
